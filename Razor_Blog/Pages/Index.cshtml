@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@* <div class="col-12 m-3"> *@
+@* @if (!string.IsNullOrWhiteSpace(@Model.createArticleModel.SuccessMessage)) *@
+@* { *@
+@*     <div class="alert alert-success"> *@
+@*         @Model.createArticleModel.SuccessMessage *@
+@*     </div> *@
+@* } *@
+@* </div> *@
+
+<div class="col-12 mb-3">
+    <div class="row">
+        <div class="border-bottom col-3 ml-auto mr-auto text-center">
+            <h2>تازه ترین مقالات</h2>
+        </div>
+    </div>
+</div>
+@foreach (var articleViewModel in @Model.articleViewModel)
+{
+    <div class="col-4 mb-2">
+        <div class="card">
+            <img src="@articleViewModel.Picture" class="card-img-top" alt="@articleViewModel.PictureAlt" title="@articleViewModel.PictureTitle">
+            <div class="card-body">
+                <h5 class="card-title">@articleViewModel.Title</h5>
+                <p class="card-text">
+                    @articleViewModel.ShortDescription
+                </p>
+                <a asp-page="./ArticleDetails" 
+                   asp-route-id="@articleViewModel.Id" 
+                   class="btn btn-primary">ادامه مطلب</a>
+                
+                <a asp-page-handler="Delete" asp-route-id="@articleViewModel.Id "class="btn btn-danger">حذف</a>
+                   
+            </div>
+                   
+        </div>
+    </div>
+}
